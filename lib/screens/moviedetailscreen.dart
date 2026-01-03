@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart'; // Added import
+// ignore: unused_import - kept for potential date formatting
 import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'dart:io'; // Import for File class
 import '../util/customTextformfield.dart';
@@ -8,8 +9,10 @@ import '../util/customdropdown.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/custom_header.dart';
 import '../models/getmoviemodel.dart'; // Import the movie model
+// ignore: unused_import - kept for potential audition model usage
 import '../models/addauditionsmodel.dart'; // Import the add audition model
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../util/date_formatter.dart'; // Add this import
 import '../services/session_manager.dart'; // Import session manager for user data
 import '../services/api_service.dart'; // Import API service for audition submission
@@ -292,9 +295,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Movie Details',
-                        style: TextStyle(
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -316,9 +320,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       const SizedBox(height: 10),
                       //_buildMovieDetailRow('Cast', _movieData?.cast ?? 'N/A'),
                       const SizedBox(height: 15),
-                      const Text(
+                      Text(
                         'Description',
-                        style: TextStyle(
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -327,16 +332,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       const SizedBox(height: 5),
                       Text(
                         _movieData?.description ?? 'No description available',
-                        style: const TextStyle(
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 14,
                           color: Colors.white70,
                         ),
                       ),
                       if (_movieData?.genreList != null && _movieData!.genreList!.isNotEmpty) ...[
                         const SizedBox(height: 15),
-                        const Text(
+                        Text(
                           'Genres',
-                          style: TextStyle(
+                          style: ResponsiveText.textStyle(
+                            context,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -358,7 +365,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               ),
                               child: Text(
                                 genre,
-                                style: const TextStyle(
+                                style: ResponsiveText.textStyle(
+                                  context,
                                   fontSize: 12,
                                   color: Colors.white,
                                 ),
@@ -374,9 +382,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               
               const SizedBox(height: 30),
               
-              const Text(
+              Text(
                 'Audition Information',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -386,12 +395,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               const SizedBox(height: 20),
               
               // Role Selection Dropdown
-              const Text(
+              Text(
                 'Select Role',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 16,
-                  color: Colors.white,
                   fontWeight: FontWeight.w500,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 10),
@@ -409,12 +419,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               const SizedBox(height: 20),
               
               // Upload Video Button
-              const Text(
+              Text(
                 'Upload Audition Video',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 16,
-                  color: Colors.white,
                   fontWeight: FontWeight.w500,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 10),
@@ -435,7 +446,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                   label: Text(
                     _videoName ?? 'Choose Video File', // Show selected file name or default text
-                    style: const TextStyle(
+                    style: ResponsiveText.textStyle(
+                      context,
                       fontSize: 16,
                       color: Colors.white,
                     ),
@@ -499,7 +511,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           flex: 1,
           child: Text(
             label,
-            style: const TextStyle(
+            style: ResponsiveText.textStyle(
+              context,
               fontSize: 16,
               color: Colors.white70,
             ),
@@ -510,10 +523,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           flex: 2,
           child: Text(
             value,
-            style: const TextStyle(
+            style: ResponsiveText.textStyle(
+              context,
               fontSize: 16,
-              color: Colors.white,
               fontWeight: FontWeight.w500,
+              color: Colors.white,
             ),
           ),
         ),

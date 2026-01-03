@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import '../util/customTextformfield.dart';
 import '../util/custombutton.dart';
 import '../util/customdropdown.dart';
+import '../util/responsive_text.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/multiselect_genre_dropdown.dart';
@@ -10,6 +11,7 @@ import '../util/app_colors.dart';
 import '../util/charrole.dart';
 import '../services/api_service.dart';
 import '../services/session_manager.dart';
+// ignore: unused_import - kept for potential model conversion
 import '../models/getmoviemodel.dart' as get_movie_model;
 import '../models/editmoviemodel.dart' as edit_movie_model;
 
@@ -167,6 +169,7 @@ class _EditMovieScreenState extends State<EditMovieScreen> {
     return null;
   }
 
+  // ignore: unused_element - kept for future form validation
   String? _validateEndDate(DateTime? value) {
     if (value == null) {
       return 'Please select an end date';
@@ -215,6 +218,7 @@ class _EditMovieScreenState extends State<EditMovieScreen> {
     return null;
   }
 
+  // ignore: unused_element - kept for future form validation
   String? _validateCast(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter cast information';
@@ -222,6 +226,7 @@ class _EditMovieScreenState extends State<EditMovieScreen> {
     return null;
   }
 
+  // ignore: unused_element - kept for future form validation
   String? _validateDuration(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter duration';
@@ -229,6 +234,7 @@ class _EditMovieScreenState extends State<EditMovieScreen> {
     return null;
   }
 
+  // ignore: unused_element - kept for future form validation
   String? _validatePosterUrl(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter poster URL';
@@ -237,6 +243,7 @@ class _EditMovieScreenState extends State<EditMovieScreen> {
   }
 
   // Add this validation function for character roles
+  // ignore: unused_element
   String? _validateCharacterRoles(List<CharacterRole> roles) {
     if (roles.isEmpty) {
       return 'At least one character role is required';
@@ -500,34 +507,18 @@ class _EditMovieScreenState extends State<EditMovieScreen> {
     }
   }
 
+  // ignore: unused_element - kept for potential future use
   List<Map<String, dynamic>> _convertExistingRolesToApiFormat() {
     List<Map<String, dynamic>> rolesData = [];
     if (widget.movie.roles != null) {
       for (var roleData in widget.movie.roles!) {
-        // Check if roleData is of type Roles (from the model) or Map
-        if (roleData is edit_movie_model.Roles) {
-          // Handle if it's the Roles model object
-          rolesData.add({
-            'role_type': roleData.roleType ?? '',
-            'gender': roleData.gender ?? '',
-            'age_range': roleData.ageRange ?? '',
-            'dialogue_sample': roleData.dialogueSample ?? '',
-          });
-        } else if (roleData is Map<String, dynamic>) {
-          rolesData.add({
-            'role_type': roleData.roleType ?? '',
-            'gender': roleData.gender ?? '',
-            'age_range': roleData.ageRange ?? '',
-            'dialogue_sample': roleData.dialogueSample ?? '',
-          });
-        } else if (roleData is Map) {
-          rolesData.add({
-            'role_type': roleData.roleType?.toString() ?? '',
-            'gender': roleData.gender?.toString() ?? '',
-            'age_range': roleData.ageRange?.toString() ?? '',
-            'dialogue_sample': roleData.dialogueSample?.toString() ?? '',
-          });
-        }
+        // Handle the Roles model object
+        rolesData.add({
+          'role_type': roleData.roleType ?? '',
+          'gender': roleData.gender ?? '',
+          'age_range': roleData.ageRange ?? '',
+          'dialogue_sample': roleData.dialogueSample ?? '',
+        });
       }
     }
     return rolesData;
@@ -564,9 +555,10 @@ class _EditMovieScreenState extends State<EditMovieScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Edit Movie',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -681,9 +673,10 @@ class _EditMovieScreenState extends State<EditMovieScreen> {
 
               const SizedBox(height: 30),
 
-              const Text(
+              Text(
                 'Character Roles',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,

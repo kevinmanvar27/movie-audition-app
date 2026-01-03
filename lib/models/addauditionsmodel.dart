@@ -9,12 +9,12 @@ import 'dart:convert';
 //
 //   addauditionsmodel.fromJson(Map<String, dynamic> json) {
 //     success = json['success'];
-//     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+//     data = json['data'] != null ? Data.fromJson(json['data']) : null;
 //     message = json['message'];
 //   }
 //
 //   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     final Map<String, dynamic> data = <String, dynamic>{};
 //     data['success'] = this.success;
 //     if (this.data != null) {
 //       data['data'] = this.data!.toJson();
@@ -142,7 +142,7 @@ import 'dart:convert';
 //   }
 //
 //   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     final Map<String, dynamic> data = <String, dynamic>{};
 //     data['id'] = this.id;
 //     data['user_id'] = this.userId;
 //     data['movie_id'] = this.movieId;
@@ -158,8 +158,6 @@ import 'dart:convert';
 //   }
 // }
 
-import 'dart:convert';
-
 class addauditionsmodel {
   bool? success;
   Data? data;
@@ -169,12 +167,12 @@ class addauditionsmodel {
 
   addauditionsmodel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = this.success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
@@ -306,7 +304,7 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['movie_id'] = this.movieId;

@@ -12,14 +12,14 @@ class getsubmittedauditionsmodel {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = this.success;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -153,7 +153,7 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['movie_id'] = this.movieId;
@@ -187,9 +187,9 @@ class Movie {
   String? status;
   String? createdAt;
   String? updatedAt;
-  Null? duration;
-  Null? cast;
-  Null? posterUrl;
+  String? duration;
+  String? cast;
+  String? posterUrl;
   List<String>? genreList;
 
   Movie(
@@ -228,7 +228,7 @@ class Movie {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['title'] = this.title;
@@ -367,8 +367,8 @@ class User {
         urls = _processGalleryUrls(parsed);
       } catch (e) {
         // If parsing fails, treat as single URL
-        String? url = galleryData;
-        if (url != null && url.isNotEmpty) {
+        String url = galleryData;
+        if (url.isNotEmpty) {
           // Unescape the URL (remove extra backslashes)
           url = url.replaceAll(r'\/', '/');
           // Normalize multiple slashes
@@ -395,7 +395,7 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['name'] = this.name;
     data['email'] = this.email;

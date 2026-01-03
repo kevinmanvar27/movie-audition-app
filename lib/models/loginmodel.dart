@@ -7,12 +7,12 @@ class loginmodel {
 
   loginmodel.fromJson(Map<String, dynamic> json) {
     success = json['success'] is bool ? json['success'] : false;
-    data = json['data'] != null ? new loginData.fromJson(json['data']) : null;
+    data = json['data'] != null ? loginData.fromJson(json['data']) : null;
     message = json['message'] is String ? json['message'] : '';
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = this.success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
@@ -29,12 +29,12 @@ class loginData {
   loginData({this.user, this.token});
 
   loginData.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     token = json['token'] is String ? json['token'] : '';
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
@@ -47,17 +47,17 @@ class User {
   int? id;
   String? name;
   String? email;
-  Null? emailVerifiedAt;
+  String? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
   String? role;
   int? roleId;
   String? status;
-  Null? mobileNumber;
+  String? mobileNumber;
   String? profilePhoto;
-  Null? imageGallery;
-  Null? dateOfBirth;
-  Null? gender;
+  dynamic imageGallery;
+  String? dateOfBirth;
+  String? gender;
 
   User(
       {this.id,
@@ -79,13 +79,13 @@ class User {
     id = json['id'] is int ? json['id'] : 0;
     name = json['name'] is String ? json['name'] : '';
     email = json['email'] is String ? json['email'] : '';
-    emailVerifiedAt = json['email_verified_at'] is Null ? json['email_verified_at'] : null;
+    emailVerifiedAt = json['email_verified_at']?.toString();
     createdAt = json['created_at'] is String ? json['created_at'] : '';
     updatedAt = json['updated_at'] is String ? json['updated_at'] : '';
     role = json['role'] is String ? json['role'] : '';
     roleId = json['role_id'] is int ? json['role_id'] : 0;
     status = json['status'] is String ? json['status'] : '';
-    mobileNumber = json['mobile_number'] is Null ? json['mobile_number'] : null;
+    mobileNumber = json['mobile_number']?.toString();
     
     // Process profile photo URL - unescape and format properly
     String? profilePhotoValue = json['profile_photo']?.toString();
@@ -97,13 +97,13 @@ class User {
     }
     profilePhoto = profilePhotoValue;
     
-    imageGallery = json['image_gallery'] is Null ? json['image_gallery'] : null;
-    dateOfBirth = json['date_of_birth'] is Null ? json['date_of_birth'] : null;
-    gender = json['gender'] is Null ? json['gender'] : null;
+    imageGallery = json['image_gallery'];
+    dateOfBirth = json['date_of_birth']?.toString();
+    gender = json['gender']?.toString();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['name'] = this.name;
     data['email'] = this.email;

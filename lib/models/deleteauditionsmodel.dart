@@ -20,7 +20,7 @@ class deleteauditionmodel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = this.success;
     if (this.data != null) {
       // We map the list directly. If the items inside eventually have .toJson(),

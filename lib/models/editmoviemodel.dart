@@ -7,12 +7,12 @@ class EditMovieModel {
 
   EditMovieModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? new EditData.fromJson(json['data']) : null;
+    data = json['data'] != null ? EditData.fromJson(json['data']) : null;
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = this.success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
@@ -34,9 +34,9 @@ class EditData {
   String? status;
   String? createdAt;
   String? updatedAt;
-  Null? duration;
-  Null? cast;
-  Null? posterUrl;
+  String? duration;
+  String? cast;
+  String? posterUrl;
   List<String>? genreList;
   List<Roles>? roles;
 
@@ -77,13 +77,13 @@ class EditData {
     if (json['roles'] != null) {
       roles = <Roles>[];
       json['roles'].forEach((v) {
-        roles!.add(new Roles.fromJson(v));
+        roles!.add(Roles.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['title'] = this.title;
@@ -110,7 +110,7 @@ class EditData {
 class Roles {
   int? id;
   int? movieId;
-  Null? description;
+  String? description;
   String? status;
   String? createdAt;
   String? updatedAt;
@@ -146,7 +146,7 @@ class Roles {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['movie_id'] = this.movieId;
     data['description'] = this.description;

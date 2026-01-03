@@ -7,9 +7,11 @@ import '../widgets/custom_header.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/multiselect_genre_dropdown.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../util/charrole.dart';
 import '../services/api_service.dart';
 import '../services/session_manager.dart';
+// ignore: unused_import - model kept for future API response handling
 import '../models/Addmoviemodel.dart';
 
 class AddMovieScreen extends StatefulWidget {
@@ -52,6 +54,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
   //   return null;
   // }
 
+  // ignore: unused_element - kept for future form validation
   String? _validateEndDate(DateTime? value) {
     if (value == null) {
       return 'Please select an end date';
@@ -101,6 +104,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
     return null;
   }
 
+  // ignore: unused_element - kept for future form validation
   String? _validateCast(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter cast information';
@@ -108,6 +112,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
     return null;
   }
 
+  // ignore: unused_element - kept for future form validation
   String? _validateDuration(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter duration';
@@ -115,6 +120,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
     return null;
   }
 
+  // ignore: unused_element - kept for future form validation
   String? _validatePoster(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter poster URL';
@@ -166,6 +172,7 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
   }
 
   // Add this validation function for character roles
+  // ignore: unused_element
   String? _validateCharacterRoles(List<CharacterRole> roles) {
     if (roles.isEmpty) {
       return 'At least one character role is required';
@@ -394,9 +401,10 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Add New Movie',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -519,9 +527,10 @@ class _AddMovieScreenState extends State<AddMovieScreen> {
               const SizedBox(height: 30),
 
               // Character Roles Section
-              const Text(
+              Text(
                 'Character Roles',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,

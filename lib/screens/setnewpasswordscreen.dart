@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:movie_audition/services/api_service.dart';
 // import 'package:movie_audition/services/session_manager.dart'; // SessionManager ni have jarur nathi
 
+// ignore: unused_import - kept for potential custom text form field usage
 import '../util/customTextformfield.dart';
 import '../util/custombutton.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 
 class SetNewPasswordScreen extends StatefulWidget {
   final String token;
@@ -158,9 +160,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 const SizedBox(height: 30),
 
                 // Welcome Text
-                const Text(
+                Text(
                   'Set New Password',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -172,7 +175,8 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 // Email display
                 Text(
                   'For account: ${widget.email}',
-                  style: const TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 16,
                     color: AppColors.textSecondary,
                   ),
@@ -181,9 +185,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
 
                 const SizedBox(height: 10),
 
-                const Text(
+                Text(
                   'Please enter your new password',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 16,
                     color: AppColors.textSecondary,
                   ),

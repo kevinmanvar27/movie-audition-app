@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/custom_header.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../services/session_manager.dart';
 import '../services/api_service.dart';
 import '../models/role.dart' as role_model; // Alias to avoid conflict
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:file_picker/file_picker.dart';
 import '../models/getprofilemodel.dart'; // Import profile model
+// ignore: unused_import - kept for potential gallery upload model usage
 import '../models/UploadGallerymodel.dart'; // Import upload gallery model
+// ignore: unused_import - kept for potential gallery delete model usage
 import '../models/deletegalerymodel.dart'; // Import delete gallery model
 import 'dart:io'; // Import for file handling
 import 'package:flutter_image_compress/flutter_image_compress.dart'; // Import for image compression
@@ -16,7 +19,9 @@ import 'package:flutter_image_compress/flutter_image_compress.dart' show Compres
 // Add imports for movie functionality
 import '../models/getmoviemodel.dart' as movie_model;
 import '../models/editmoviemodel.dart' as edit_movie_model;
+// ignore: unused_import - kept for potential movie screen navigation
 import '../screens/moviescreen.dart';
+// ignore: unused_import - kept for potential foundation usage
 import 'package:flutter/foundation.dart'; // Add this import for RouteAware
 
 class ProfileScreen extends StatefulWidget {
@@ -680,19 +685,21 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                         children: [
                           Text(
                             _getProfileValue('name'),
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: ResponsiveText.textStyle(
+                              context,
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                           const SizedBox(height: 8),
                           // Email ID on a single line without wrapping
                           Text(
                             _getProfileValue('email'),
-                            style: const TextStyle(
-                              color: Colors.white70,
+                            style: ResponsiveText.textStyle(
+                              context,
                               fontSize: 16,
+                              color: Colors.white70,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -701,9 +708,10 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                             const SizedBox(height: 8),
                             Text(
                               'Phone: ${_getProfileValue('mobileNumber')}',
-                              style: const TextStyle(
-                                color: Colors.white70,
+                              style: ResponsiveText.textStyle(
+                                context,
                                 fontSize: 16,
+                                color: Colors.white70,
                               ),
                             ),
                           ],
@@ -712,9 +720,10 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                             children: [
                               Text(
                                 'Role: ${role_model.Role.getRoleLabel(int.tryParse(_getProfileValue('roleId')) ?? 0)}',
-                                style: const TextStyle(
-                                  color: Colors.white70,
+                                style: ResponsiveText.textStyle(
+                                  context,
                                   fontSize: 14,
+                                  color: Colors.white70,
                                 ),
                               ),
                             ],
@@ -736,9 +745,10 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'My Images',
-                      style: TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
@@ -746,11 +756,12 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                     ),
                     TextButton(
                       onPressed: _uploadImage,
-                      child: const Text(
+                      child: Text(
                         'Add Picture',
-                        style: TextStyle(
-                          color: AppColors.secondary,
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 16,
+                          color: AppColors.secondary,
                         ),
                       ),
                     ),
@@ -846,9 +857,10 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
               
               // Show prompt for actors with no images
               if ((int.tryParse(_getProfileValue('roleId')) ?? 0) == 3 && _imageUrls.isEmpty && !_isLoadingGallery) ...[
-                const Text(
+                Text(
                   'My Images',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -867,25 +879,27 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                   ),
                   child: Column(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.photo_library_outlined,
-                        size: 64,
+                        size: ResponsiveText.iconSize(context, 64),
                         color: AppColors.textSecondary,
                       ),
                       const SizedBox(height: 16),
-                      const Text(
+                      Text(
                         'No images yet',
-                        style: TextStyle(
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: AppColors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: 8),
-                      const Text(
+                      Text(
                         'Showcase your talent by adding your portfolio images',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 14,
                           color: AppColors.textSecondary,
                         ),
@@ -915,9 +929,10 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
               
               // Show prompt for casting directors with no movies
               if ((int.tryParse(_getProfileValue('roleId')) ?? 0) == 2 && (_movies == null || _movies!.isEmpty) && !_isLoadingMovies) ...[
-                const Text(
+                Text(
                   'My Movies',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -936,25 +951,27 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                   ),
                   child: Column(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.movie_outlined,
-                        size: 64,
+                        size: ResponsiveText.iconSize(context, 64),
                         color: AppColors.textSecondary,
                       ),
                       const SizedBox(height: 16),
-                      const Text(
+                      Text(
                         'No movies yet',
-                        style: TextStyle(
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: AppColors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: 8),
-                      const Text(
+                      Text(
                         'Start your casting journey by adding your first movie project',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 14,
                           color: AppColors.textSecondary,
                         ),
@@ -989,9 +1006,10 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'My Movies',
-                      style: TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
@@ -1001,11 +1019,12 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                       onPressed: () {
                         Navigator.pushNamed(context, '/add-movie');
                       },
-                      child: const Text(
+                      child: Text(
                         'Add Movie',
-                        style: TextStyle(
-                          color: AppColors.secondary,
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 16,
+                          color: AppColors.secondary,
                         ),
                       ),
                     ),
@@ -1047,7 +1066,8 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                           ? 'No movies available. Tap "Add Movie" to create one.'
                           : 'No ${_selectedStatusFilter} movies found.',
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 16,
                         color: Colors.white70,
                       ),
@@ -1070,14 +1090,18 @@ class _ProfileScreenState extends State<ProfileScreen> with RouteAware {
                         child: ListTile(
                           title: Text(
                             movie.title ?? 'Unknown Title',
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: ResponsiveText.textStyle(
+                              context,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                           subtitle: Text(
                             '${movie.director ?? 'Unknown Director'} • ${movie.status ?? ''}',
-                            style: const TextStyle(
+                            style: ResponsiveText.textStyle(
+                              context,
+                              fontSize: 14,
                               color: Colors.white70,
                             ),
                           ),

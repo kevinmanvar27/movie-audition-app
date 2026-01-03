@@ -182,6 +182,7 @@ class _ReelsPageState extends State<ReelsPage> {
         }
 
         // Extract movie title from audition data
+        // ignore: unused_local_variable
         String? movieTitle;
         if (audition.movie != null) {
           movieTitle = audition.movie!.title;
@@ -320,10 +321,9 @@ class _ReelsPageState extends State<ReelsPage> {
                         : null;
 
                     // Extract movie title from audition data
+                    // ignore: unused_local_variable
                     String? movieTitle;
                     if (auditionData?.movie != null) {
-                      movieTitle = auditionData!.movie!.title;
-                    } else if (auditionData?.movie != null) {
                       movieTitle = auditionData!.movie!.title;
                     }
 
@@ -340,8 +340,8 @@ class _ReelsPageState extends State<ReelsPage> {
                     // Debug print to check actor data
                     if (auditionData?.user != null) {
                       print('Actor data: ${auditionData!.user!.toJson()}');
-                      print('Actor gallery: ${auditionData!.user!.imageGallery}');
-                      print('Actor gallery length: ${auditionData!.user!.imageGallery?.length}');
+                      print('Actor gallery: ${auditionData.user!.imageGallery}');
+                      print('Actor gallery length: ${auditionData.user!.imageGallery?.length}');
                     }
 
                     print('Converted to Reel with assetPath: ${convertedReel.assetPath}');

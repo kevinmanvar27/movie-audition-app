@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../services/api_service.dart';
 import '../services/session_manager.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/custom_header.dart'; // Added import for custom header
 
@@ -117,27 +118,30 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Delete Your Account',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'Warning: This action is irreversible!',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.red,
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'By deleting your account, you will:',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 16,
                   color: AppColors.textPrimary,
                 ),
@@ -148,9 +152,10 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
               const BulletPoint(text: 'Lose all your audition submissions'),
               const BulletPoint(text: 'Lose all your movie listings (if you are a casting director)'),
               const SizedBox(height: 30),
-              const Text(
+              Text(
                 'This action cannot be undone. Please make sure you want to delete your account before proceeding.',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 16,
                   color: AppColors.textSecondary,
                 ),
@@ -183,9 +188,10 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'OK',
-                          style: TextStyle(
+                          style: ResponsiveText.textStyle(
+                            context,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -212,9 +218,10 @@ class BulletPoint extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '• ',
-            style: TextStyle(
+            style: ResponsiveText.textStyle(
+              context,
               fontSize: 16,
               color: AppColors.textPrimary,
             ),
@@ -222,7 +229,8 @@ class BulletPoint extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(
+              style: ResponsiveText.textStyle(
+                context,
                 fontSize: 16,
                 color: AppColors.textPrimary,
               ),

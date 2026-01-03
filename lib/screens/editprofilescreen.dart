@@ -4,10 +4,13 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import '../util/customTextformfield.dart';
 import '../util/custombutton.dart';
+// ignore: unused_import - kept for potential responsive text usage
+import '../util/responsive_text.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/custom_header.dart';
 import '../services/api_service.dart';
 import '../services/session_manager.dart';
+// ignore: unused_import - kept for potential profile model usage
 import '../models/getprofilemodel.dart'; // Import GetProfileModel
 
 class EditProfileScreen extends StatefulWidget {

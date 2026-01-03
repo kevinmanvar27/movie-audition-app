@@ -12,7 +12,7 @@ class sendotpmodel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = this.success;
     data['message'] = this.message;
     data['temp_token'] = this.tempToken;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import - kept for potential date formatting
 import 'package:intl/intl.dart'; // Add this import for date formatting
 import '../widgets/custom_drawer.dart';
 import '../widgets/custom_header.dart';
@@ -7,6 +8,7 @@ import '../models/getmoviemodel.dart' as movie_model;
 import '../services/session_manager.dart';
 import '../util/app_colors.dart';
 import '../util/date_formatter.dart'; // Add this import
+import '../util/responsive_text.dart';
 
 class MovieScreen extends StatefulWidget {
   const MovieScreen({super.key});
@@ -232,9 +234,10 @@ class _MovieScreenState extends State<MovieScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Select a movie to audition for:',
-                style: TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
@@ -267,7 +270,8 @@ class _MovieScreenState extends State<MovieScreen> {
                               children: [
                                 Text(
                                   _errorMessage!,
-                                  style: const TextStyle(
+                                  style: ResponsiveText.textStyle(
+                                    context,
                                     fontSize: 16,
                                     color: Colors.white70,
                                   ),
@@ -287,7 +291,8 @@ class _MovieScreenState extends State<MovieScreen> {
                                   _selectedStatusFilter == 'all'
                                       ? 'No movies available. Add a new movie to get started!'
                                       : 'No ${_selectedStatusFilter} movies found.',
-                                  style: const TextStyle(
+                                  style: ResponsiveText.textStyle(
+                                    context,
                                     fontSize: 16,
                                     color: Colors.white70,
                                   ),
@@ -295,11 +300,11 @@ class _MovieScreenState extends State<MovieScreen> {
                                 ),
                               )
                             : GridView.builder(
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 16,
                                   mainAxisSpacing: 16,
-                                  childAspectRatio: 0.7,
+                                  childAspectRatio: ResponsiveText.isTablet(context) ? 0.65 : 0.7,
                                 ),
                                 itemCount: _getFilteredMovies().length,
                                 itemBuilder: (context, index) {
@@ -345,7 +350,8 @@ class _MovieScreenState extends State<MovieScreen> {
                                               children: [
                                                 Text(
                                                   movie.title ?? 'Unknown Title',
-                                                  style: const TextStyle(
+                                                  style: ResponsiveText.textStyle(
+                                                    context,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white,
@@ -357,7 +363,8 @@ class _MovieScreenState extends State<MovieScreen> {
                                                 // Update this line to format the date
                                                 Text(
                                                   '${movie.director ?? 'Unknown Director'} • ${DateFormatter.formatToDDMMYYYY(movie.endDate)}',
-                                                  style: const TextStyle(
+                                                  style: ResponsiveText.textStyle(
+                                                    context,
                                                     fontSize: 14,
                                                     color: Colors.white70,
                                                   ),
@@ -377,7 +384,8 @@ class _MovieScreenState extends State<MovieScreen> {
                                                     ),
                                                     child: Text(
                                                       movie.genreList!.first,
-                                                      style: const TextStyle(
+                                                      style: ResponsiveText.textStyle(
+                                                        context,
                                                         fontSize: 12,
                                                         color: Colors.white,
                                                       ),
@@ -402,6 +410,7 @@ class _MovieScreenState extends State<MovieScreen> {
 }
 
 // Add a helper function to map API status values to user-friendly labels
+// ignore: unused_element
 String _getStatusDisplayText(String? status) {
   switch (status) {
     case 'open':

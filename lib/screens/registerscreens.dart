@@ -6,6 +6,8 @@ import '../util/customTextformfield.dart';
 import '../util/custombutton.dart';
 import '../util/customdropdown.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
+// ignore: unused_import - kept for potential session management
 import '../services/session_manager.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -188,9 +190,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 30),
                 
                 // Welcome Text
-                const Text(
+                Text(
                   'Create Account',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -199,9 +202,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 
                 const SizedBox(height: 10),
                 
-                const Text(
+                Text(
                   'Sign up to get started',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 16,
                     color: AppColors.textSecondary,
                   ),
@@ -335,23 +339,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Already have an account?',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 16,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(
+                      child: Text(
                         'Login',
-                        style: TextStyle(
-                          color: AppColors.borderFocused,
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          color: AppColors.borderFocused,
                         ),
                       ),
                     ),

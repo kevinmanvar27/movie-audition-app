@@ -27,6 +27,7 @@ import '../models/addauditionsmodel.dart'; // Import add auditions model
 import '../models/updateauditionmodel.dart'; // Import update audition model
 import '../models/deleteaccoutmodel.dart'; // Import delete account model
 import 'package:http_parser/http_parser.dart';
+// ignore: unused_import - kept for potential image compression usage
 import 'package:flutter_image_compress/flutter_image_compress.dart'; // Import for image compression
 
 // API Service class

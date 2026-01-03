@@ -4,6 +4,7 @@ import 'package:movie_audition/services/api_service.dart';
 import '../util/customTextformfield.dart';
 import '../util/custombutton.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -116,9 +117,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 const SizedBox(height: 30),
                 
                 // Title
-                const Text(
+                Text(
                   'Forgot Password?',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -127,9 +129,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 
                 const SizedBox(height: 10),
                 
-                const Text(
+                Text(
                   'Enter your email to reset your password',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 16,
                     color: AppColors.textSecondary,
                   ),
@@ -164,11 +167,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text(
+                    child: Text(
                       'Back to Login',
-                      style: TextStyle(
-                        color: AppColors.borderFocused,
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 16,
+                        color: AppColors.borderFocused,
                       ),
                     ),
                   ),

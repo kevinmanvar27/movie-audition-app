@@ -9,12 +9,12 @@ class GetmyauditionsModel {
 
   GetmyauditionsModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = this.success;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
@@ -33,10 +33,10 @@ class Data {
   int? lastPage;
   String? lastPageUrl;
   List<Links>? links;
-  Null? nextPageUrl;
+  String? nextPageUrl;
   String? path;
   int? perPage;
-  Null? prevPageUrl;
+  String? prevPageUrl;
   int? to;
   int? total;
 
@@ -61,7 +61,7 @@ class Data {
       // **CRITICAL FIX: Initializing List<AuditionData> and using AuditionData.fromJson**
       data = <AuditionData>[];
       json['data'].forEach((v) {
-        data!.add(new AuditionData.fromJson(v));
+        data!.add(AuditionData.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];
@@ -71,7 +71,7 @@ class Data {
     if (json['links'] != null) {
       links = <Links>[];
       json['links'].forEach((v) {
-        links!.add(new Links.fromJson(v));
+        links!.add(Links.fromJson(v));
       });
     }
     nextPageUrl = json['next_page_url'];
@@ -83,7 +83,7 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['current_page'] = this.currentPage;
     if (this.data != null) {
       // Calling AuditionData.toJson() for each item
@@ -230,7 +230,7 @@ class AuditionData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['movie_id'] = this.movieId;
@@ -261,9 +261,9 @@ class Movie {
   String? status;
   String? createdAt;
   String? updatedAt;
-  Null? duration;
-  Null? cast;
-  Null? posterUrl;
+  String? duration;
+  String? cast;
+  String? posterUrl;
   List<String>? genreList;
 
   Movie(
@@ -302,7 +302,7 @@ class Movie {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['title'] = this.title;
@@ -338,7 +338,7 @@ class Links {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['url'] = this.url;
     data['label'] = this.label;
     data['page'] = this.page;

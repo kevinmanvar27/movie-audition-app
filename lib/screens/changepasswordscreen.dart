@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import - kept for potential future use
 import '../util/customTextformfield.dart';
 import '../util/custombutton.dart';
 import '../widgets/custom_drawer.dart';
@@ -6,6 +7,8 @@ import '../widgets/custom_header.dart';
 import '../services/api_service.dart';
 import '../services/session_manager.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
+// ignore: unused_import - kept for potential toast notifications
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -139,10 +142,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             children: [
               const SizedBox(height: 20),
 
-              const Text(
+              Text(
                 'Enter your current password and new password to change your password.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.white70),
+                style: ResponsiveText.textStyle(context, fontSize: 16, color: Colors.white70),
               ),
 
               const SizedBox(height: 30),

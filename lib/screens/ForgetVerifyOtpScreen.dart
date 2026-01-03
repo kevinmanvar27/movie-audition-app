@@ -5,6 +5,7 @@ import 'package:movie_audition/services/session_manager.dart';
 
 import '../util/custombutton.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 
 class ForgetVerifyOtpScreen extends StatefulWidget {
   final String email;
@@ -137,9 +138,10 @@ class _ForgetVerifyOtpScreenState extends State<ForgetVerifyOtpScreen> {
                 const SizedBox(height: 30),
 
                 // Welcome Text
-                const Text(
+                Text(
                   'Verify Your Email',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -151,7 +153,8 @@ class _ForgetVerifyOtpScreenState extends State<ForgetVerifyOtpScreen> {
                 Text(
                   'Enter the 6-digit code sent to ${widget.email}',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 16,
                     color: AppColors.textSecondary,
                   ),
@@ -232,12 +235,13 @@ class _ForgetVerifyOtpScreenState extends State<ForgetVerifyOtpScreen> {
                       );
                     }
                   },
-                  child: const Text(
+                  child: Text(
                     'Didn\'t receive the code? Resend OTP',
-                    style: TextStyle(
-                      color: AppColors.borderFocused,
+                    style: ResponsiveText.textStyle(
+                      context,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: AppColors.borderFocused,
                     ),
                   ),
                 ),

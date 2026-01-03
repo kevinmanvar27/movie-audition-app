@@ -1,6 +1,7 @@
 // actorprofile.dart
 import 'package:flutter/material.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/custom_drawer.dart';
 import '../models/getsubmittedmodel.dart';
@@ -21,6 +22,7 @@ class ActorProfileScreen extends StatefulWidget {
 class _ActorProfileScreenState extends State<ActorProfileScreen> {
   bool _isLoading = true;
   ProfileData? _profileData;
+  // ignore: unused_field - kept for future use with audition data
   Data? _auditionData; // Add this to store audition data
   String? _errorMessage;
   List<String>? _galleryData; // Add this to store gallery data from audition
@@ -259,7 +261,8 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
             // Actor Name
             Text(
               _profileData?.name ?? widget.actor.name ?? 'Unknown Actor',
-              style: const TextStyle(
+              style: ResponsiveText.textStyle(
+                context,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: AppColors.textPrimary,
@@ -280,9 +283,10 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Profile Information',
-                      style: TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
@@ -319,9 +323,10 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Gallery',
-                        style: TextStyle(
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: AppColors.textPrimary,
@@ -410,7 +415,7 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
       children: [
         Icon(
           icon,
-          size: 20,
+          size: ResponsiveText.iconSize(context, 20),
           color: AppColors.secondary,
         ),
         const SizedBox(width: 12),
@@ -418,7 +423,8 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
           flex: 1,
           child: Text(
             label,
-            style: const TextStyle(
+            style: ResponsiveText.textStyle(
+              context,
               fontSize: 16,
               color: AppColors.textSecondary,
               fontWeight: FontWeight.w500,
@@ -430,7 +436,8 @@ class _ActorProfileScreenState extends State<ActorProfileScreen> {
           flex: 2,
           child: Text(
             value,
-            style: const TextStyle(
+            style: ResponsiveText.textStyle(
+              context,
               fontSize: 16,
               color: AppColors.textPrimary,
             ),

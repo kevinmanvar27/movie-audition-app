@@ -3,6 +3,7 @@ import '../models/getsubmittedmodel.dart';
 import '../services/api_service.dart';
 import '../services/session_manager.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/custom_drawer.dart';
 import '../screens/reels/reels_page.dart';
@@ -115,7 +116,11 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
           roleFilter: widget.roleType,
         ),
       ),
-    );
+    ).then((_) {
+      // Refresh auditions when returning from ReelsPage
+      // This ensures viewed videos are removed from pending list
+      _loadAuditions();
+    });
   }
 
   Widget _buildVideoThumbnail(Data audition, int index) {
@@ -143,9 +148,9 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
                   alignment: Alignment.center,
                   children: [
                     // Video icon as placeholder
-                    const Icon(
+                    Icon(
                       Icons.play_circle_outline,
-                      size: 48,
+                      size: ResponsiveText.iconSize(context, 48),
                       color: Colors.white70,
                     ),
                     // Status badge
@@ -164,7 +169,8 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
                           ),
                           child: Text(
                             audition.status!,
-                            style: const TextStyle(
+                            style: ResponsiveText.textStyle(
+                              context,
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -182,9 +188,9 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
                           color: Colors.black45,
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.videocam,
-                          size: 16,
+                          size: ResponsiveText.iconSize(context, 16),
                           color: Colors.white,
                         ),
                       ),
@@ -203,7 +209,8 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
                   if (audition.movie?.title != null)
                     Text(
                       audition.movie!.title!,
-                      style: const TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.white70,
@@ -217,7 +224,8 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
                   if (audition.role != null)
                     Text(
                       audition.role!,
-                      style: const TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -229,7 +237,8 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
                   // Applicant Name
                   Text(
                     audition.applicantName ?? 'Unknown',
-                    style: const TextStyle(
+                    style: ResponsiveText.textStyle(
+                      context,
                       fontSize: 12,
                       color: Colors.white70,
                     ),
@@ -244,7 +253,8 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
                         Expanded(
                           child: Text(
                             audition.user!.name ?? '',
-                            style: const TextStyle(
+                            style: ResponsiveText.textStyle(
+                              context,
                               fontSize: 11,
                               color: Colors.white70,
                             ),
@@ -294,7 +304,8 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
           children: [
             Text(
               'Auditions for ${widget.roleType ?? 'this role'}',
-              style: const TextStyle(
+              style: ResponsiveText.textStyle(
+                context,
                 fontSize: 18,
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
@@ -304,7 +315,8 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
               const SizedBox(height: 4),
               Text(
                 'Movie: ${widget.movieTitle}',
-                style: const TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 14,
                   color: Colors.white70,
                 ),
@@ -315,10 +327,11 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : (_filteredAuditions == null || _filteredAuditions!.isEmpty)
-                      ? const Center(
+                      ? Center(
                           child: Text(
                             'No auditions available for this role.',
-                            style: TextStyle(
+                            style: ResponsiveText.textStyle(
+                              context,
                               fontSize: 16,
                               color: Colors.white70,
                             ),
@@ -326,11 +339,11 @@ class _AuditionGridScreenState extends State<AuditionGridScreen> {
                           ),
                         )
                       : GridView.builder(
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 16,
                             mainAxisSpacing: 16,
-                            childAspectRatio: 0.75,
+                            childAspectRatio: ResponsiveText.isTablet(context) ? 0.7 : 0.75,
                           ),
                           itemCount: _filteredAuditions!.length,
                           itemBuilder: (context, index) {

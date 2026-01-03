@@ -9,6 +9,7 @@ import '../services/api_service.dart';
 import '../services/session_manager.dart';
 import '../models/getmyauditionsmodel.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../widgets/reel_player.dart';
 import '../models/reel.dart';
 
@@ -23,6 +24,8 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
   List<AuditionData> _auditions = [];
   bool _isLoading = true;
   String _selectedStatusFilter = 'all'; // Add status filter state
+  int? _selectedMovieFilter; // Add movie filter state (null means 'all')
+  // ignore: unused_field - kept for potential movie title caching
   Map<int, String> _movieTitles = {}; // Cache for movie titles
 
   @override
@@ -372,17 +375,29 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
     return movieGroups;
   }
 
-  // Get filtered movie groups based on selected status
+  // Get filtered movie groups based on selected status and movie filter
   Map<int, List<AuditionData>> _getFilteredMovieGroups() {
     final allMovieGroups = _getMovieGroups();
     
+    // First filter by movie if a specific movie is selected
+    Map<int, List<AuditionData>> movieFilteredGroups = {};
+    if (_selectedMovieFilter != null) {
+      // Only include the selected movie
+      if (allMovieGroups.containsKey(_selectedMovieFilter)) {
+        movieFilteredGroups[_selectedMovieFilter!] = allMovieGroups[_selectedMovieFilter]!;
+      }
+    } else {
+      movieFilteredGroups = allMovieGroups;
+    }
+    
+    // Then filter by status
     if (_selectedStatusFilter == 'all') {
-      return allMovieGroups;
+      return movieFilteredGroups;
     }
     
     Map<int, List<AuditionData>> filteredGroups = {};
     
-    allMovieGroups.forEach((movieId, auditions) {
+    movieFilteredGroups.forEach((movieId, auditions) {
       final filteredAuditions = auditions.where((audition) {
         final status = audition.status?.toLowerCase() ?? '';
         
@@ -393,6 +408,8 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
             return status == 'rejected';
           case 'pending':
             return status == 'pending';
+          case 'viewed':
+            return status == 'viewed';
           default:
             return true;
         }
@@ -404,6 +421,69 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
     });
     
     return filteredGroups;
+  }
+
+  // Get list of unique movies for dropdown
+  List<Map<String, dynamic>> _getUniqueMovies() {
+    Map<int, String> uniqueMovies = {};
+    for (var audition in _auditions) {
+      final movieId = audition.movieId;
+      final movieTitle = audition.movie?.title;
+      if (movieId != null && movieTitle != null && !uniqueMovies.containsKey(movieId)) {
+        uniqueMovies[movieId] = movieTitle;
+      }
+    }
+    return uniqueMovies.entries
+        .map((e) => {'id': e.key, 'title': e.value})
+        .toList();
+  }
+
+  // Build movie filter dropdown
+  Widget _buildMovieFilterDropdown() {
+    final movies = _getUniqueMovies();
+    
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        color: AppColors.cardBackground,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.border, width: 1),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<int?>(
+          value: _selectedMovieFilter,
+          hint: const Text(
+            'All Movies',
+            style: TextStyle(color: Colors.white70),
+          ),
+          dropdownColor: AppColors.cardBackground,
+          icon: const Icon(Icons.arrow_drop_down, color: Colors.white70),
+          isExpanded: true,
+          items: [
+            const DropdownMenuItem<int?>(
+              value: null,
+              child: Text(
+                'All Movies',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            ...movies.map((movie) => DropdownMenuItem<int?>(
+              value: movie['id'] as int,
+              child: Text(
+                movie['title'] as String,
+                style: const TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+              ),
+            )),
+          ],
+          onChanged: (value) {
+            setState(() {
+              _selectedMovieFilter = value;
+            });
+          },
+        ),
+      ),
+    );
   }
 
   // Build filter chip
@@ -436,6 +516,7 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
     );
   }
 
+  // ignore: unused_element - kept for potential video URL extraction
   String _extractFirstVideoUrl(String? uploadedVideosJson) {
     print('Processing uploadedVideosJson: $uploadedVideosJson');
 
@@ -569,11 +650,13 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
     return '';
   }
 
+  // ignore: unused_element - kept for compatibility
   void _updateStatus(int index, ReelStatus status) {
     // This method is kept for compatibility but won't be used with AuditionData
     setState(() {});
   }
 
+  // ignore: unused_element - kept for potential profile navigation
   void _openProfile(Reel reel) {
     // Navigate to the main profile screen
     Navigator.pushNamed(context, '/profile');
@@ -598,15 +681,19 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'My Auditions by Movie:',
-                    style: TextStyle(
+                    style: ResponsiveText.textStyle(
+                      context,
                       fontSize: 18,
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 16),
+                  // Movie Filter Dropdown
+                  _buildMovieFilterDropdown(),
+                  const SizedBox(height: 12),
                   // Status Filter Chips
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -619,6 +706,8 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
                         _buildFilterChip('Rejected', 'rejected'),
                         const SizedBox(width: 8),
                         _buildFilterChip('Pending', 'pending'),
+                        const SizedBox(width: 8),
+                        _buildFilterChip('Viewed', 'viewed'),
                       ],
                     ),
                   ),
@@ -630,21 +719,23 @@ class _MyAuditionsScreenState extends State<MyAuditionsScreen> {
                               _selectedStatusFilter == 'all'
                                   ? 'No auditions found'
                                   : 'No ${_selectedStatusFilter} auditions found',
-                              style: const TextStyle(
+                              style: ResponsiveText.textStyle(
+                                context,
                                 fontSize: 18,
                                 color: Colors.white70,
                               ),
                             ),
                           )
                         : GridView.builder(
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               crossAxisSpacing: 16,
                               mainAxisSpacing: 16,
-                              childAspectRatio: 0.7,
+                              childAspectRatio: ResponsiveText.isTablet(context) ? 0.65 : 0.7,
                             ),
                             itemCount: movieEntries.length,
                             itemBuilder: (context, index) {
+                              // ignore: unused_local_variable - kept for potential future use
                               final movieId = movieEntries[index].key;
                               final auditions = movieEntries[index].value;
                               final firstAudition = auditions.first;
@@ -789,6 +880,7 @@ class _MyAuditionsReelViewState extends State<_MyAuditionsReelView> {
     super.dispose();
   }
 
+  // ignore: unused_element - kept for potential video URL extraction
   String _extractFirstVideoUrl(String? uploadedVideosJson) {
     print('Processing uploadedVideosJson: $uploadedVideosJson');
 

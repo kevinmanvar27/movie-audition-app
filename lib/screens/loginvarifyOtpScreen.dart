@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../util/custombutton.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../services/api_service.dart';
 import '../services/session_manager.dart';
 
@@ -157,9 +158,10 @@ class _loginvarifyOtpScreenState extends State<loginvarifyOtpScreen> {
                 const SizedBox(height: 30),
 
                 // Welcome Text
-                const Text(
+                Text(
                   'Verify Your Email',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -171,7 +173,8 @@ class _loginvarifyOtpScreenState extends State<loginvarifyOtpScreen> {
                 Text(
                   'Enter the 6-digit code sent to ${widget.email}',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 16,
                     color: AppColors.textSecondary,
                   ),
@@ -261,9 +264,10 @@ class _loginvarifyOtpScreenState extends State<loginvarifyOtpScreen> {
                       );
                     }
                   },
-                  child: const Text(
+                  child: Text(
                     'Didn\'t receive the code? Resend OTP',
-                    style: TextStyle(
+                    style: ResponsiveText.textStyle(
+                      context,
                       color: AppColors.borderFocused,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/custom_drawer.dart';
 
@@ -58,7 +59,8 @@ class StatusSelectionScreen extends StatelessWidget {
           children: [
             Text(
               'Select status for $roleType auditions',
-              style: const TextStyle(
+              style: ResponsiveText.textStyle(
+                context,
                 fontSize: 18,
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
@@ -68,16 +70,18 @@ class StatusSelectionScreen extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 'Movie: $movieTitle',
-                style: const TextStyle(
+                style: ResponsiveText.textStyle(
+                  context,
                   fontSize: 14,
                   color: Colors.white70,
                 ),
               ),
             ],
             const SizedBox(height: 30),
-            const Text(
+            Text(
               'Choose a status to filter auditions:',
-              style: TextStyle(
+              style: ResponsiveText.textStyle(
+                context,
                 fontSize: 16,
                 color: Colors.white,
                 fontWeight: FontWeight.w400,
@@ -86,11 +90,11 @@ class StatusSelectionScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 1.2,
+                  childAspectRatio: ResponsiveText.isTablet(context) ? 1.1 : 1.2,
                 ),
                 itemCount: statuses.length,
                 itemBuilder: (context, index) {
@@ -122,13 +126,14 @@ class StatusSelectionScreen extends StatelessWidget {
                           children: [
                             Icon(
                               status['icon'],
-                              size: 40,
+                              size: ResponsiveText.iconSize(context, 40),
                               color: status['color'],
                             ),
                             const SizedBox(height: 12),
                             Text(
                               status['name'],
-                              style: TextStyle(
+                              style: ResponsiveText.textStyle(
+                                context,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: status['color'],

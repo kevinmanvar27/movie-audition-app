@@ -6,6 +6,7 @@ import '../models/reel.dart';
 import '../services/api_service.dart';
 import '../services/session_manager.dart';
 import '../util/app_colors.dart';
+// ignore: unused_import - kept for potential role model usage
 import '../models/role.dart';
 
 class ReelPlayer extends StatefulWidget {
@@ -402,9 +403,9 @@ class _ReelPlayerState extends State<ReelPlayer> {
                                 const SizedBox(height: 4),
                               ],
                               // Role name/caption
-                              if (widget.reel.caption != null && widget.reel.caption!.isNotEmpty) ...[
+                              if (widget.reel.caption.isNotEmpty) ...[
                                 Text(
-                                  widget.reel.caption!,
+                                  widget.reel.caption,
                                   style: const TextStyle(
                                     color: AppColors.textSecondary,
                                     fontSize: 14,

@@ -10,14 +10,14 @@ class getmoviesmodel {
     if (json['data'] != null) {
       data = <GetData>[];
       json['data'].forEach((v) {
-        data!.add(new GetData.fromJson(v));
+        data!.add(GetData.fromJson(v));
       });
     }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = this.success;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -39,9 +39,9 @@ class GetData {
   String? status;
   String? createdAt;
   String? updatedAt;
-  Null? duration;
-  Null? cast;
-  Null? posterUrl;
+  String? duration;
+  String? cast;
+  String? posterUrl;
   List<String>? genreList;
   List<Roles>? roles;
 
@@ -82,13 +82,13 @@ class GetData {
     if (json['roles'] != null) {
       roles = <Roles>[];
       json['roles'].forEach((v) {
-        roles!.add(new Roles.fromJson(v));
+        roles!.add(Roles.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['title'] = this.title;
@@ -115,7 +115,7 @@ class GetData {
 class Roles {
   int? id;
   int? movieId;
-  Null? description;
+  String? description;
   String? status;
   String? createdAt;
   String? updatedAt;
@@ -152,7 +152,7 @@ class Roles {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['movie_id'] = this.movieId;
     data['description'] = this.description;

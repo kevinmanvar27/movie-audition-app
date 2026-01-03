@@ -5,6 +5,7 @@ import 'package:movie_audition/services/api_service.dart';
 import '../util/customTextformfield.dart';
 import '../util/custombutton.dart';
 import '../util/app_colors.dart';
+import '../util/responsive_text.dart';
 import '../services/session_manager.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -151,9 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 40),
                 
                 // Welcome Text
-                const Text(
+                Text(
                   'Welcome Back!',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -162,9 +164,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 
                 const SizedBox(height: 10),
                 
-                const Text(
+                Text(
                   'Sign in to continue',
-                  style: TextStyle(
+                  style: ResponsiveText.textStyle(
+                    context,
                     fontSize: 16,
                     color: AppColors.textSecondary,
                   ),
@@ -237,11 +240,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       Navigator.pushNamed(context, '/forgot-password');
                     },
-                    child: const Text(
+                    child: Text(
                       'Forgot Password?',
-                      style: TextStyle(
-                        color: AppColors.borderFocused,
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 16,
+                        color: AppColors.borderFocused,
                       ),
                     ),
                   ),
@@ -253,23 +257,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "Don't have an account?",
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 16,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/register');
                       },
-                      child: const Text(
+                      child: Text(
                         'Register',
-                        style: TextStyle(
-                          color: AppColors.borderFocused,
+                        style: ResponsiveText.textStyle(
+                          context,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          color: AppColors.borderFocused,
                         ),
                       ),
                     ),

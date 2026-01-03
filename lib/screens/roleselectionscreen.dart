@@ -3,7 +3,7 @@ import '../widgets/custom_header.dart';
 import '../widgets/custom_drawer.dart';
 import '../util/app_colors.dart';
 import '../util/custombutton.dart'; // This imports CustomAnimatedButton
-import '../models/role.dart';
+import '../util/responsive_text.dart';
 import '../services/session_manager.dart';
 
 class RoleSelectionScreen extends StatefulWidget {
@@ -72,9 +72,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
+            Text(
               'Welcome!',
-              style: TextStyle(
+              style: ResponsiveText.textStyle(
+                context,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: AppColors.textPrimary,
@@ -82,9 +83,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
-            const Text(
+            Text(
               'Please select your role to continue',
-              style: TextStyle(
+              style: ResponsiveText.textStyle(
+                context,
                 fontSize: 16,
                 color: AppColors.textSecondary,
               ),
@@ -118,18 +120,20 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                           : AppColors.textSecondary,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
+                    Text(
                       'Actor',
-                      style: TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
+                    Text(
                       'Browse movies, apply for auditions, and manage your applications',
-                      style: TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 14,
                         color: AppColors.textSecondary,
                       ),
@@ -167,18 +171,20 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                           : AppColors.textSecondary,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
+                    Text(
                       'Casting Director',
-                      style: TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
+                    Text(
                       'Create and manage movie auditions, review applications',
-                      style: TextStyle(
+                      style: ResponsiveText.textStyle(
+                        context,
                         fontSize: 14,
                         color: AppColors.textSecondary,
                       ),
